@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ratna Pearl Weddings</title>
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- React + ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Babel (lets us write JSX directly in the browser, no build step) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Google Fonts matching our design system -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Libre+Bodoni:ital@0;1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Design tokens: colors, fonts -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#B8935A',
+            maroon: '#6B1F2A',
+            ivory: '#FAF7F2',
+          },
+          fontFamily: {
+            heading: ['"Cinzel Decorative"', 'serif'],
+            quote: ['"Libre Bodoni"', 'serif'],
+            body: ['"Jost"', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Jost', sans-serif; }
+  </style>
+</head>
+<body class="bg-ivory">
+  <div id="root"></div>
+
+  <!-- Components (order matters: load before app.js which uses them) -->
+  <script type="text/babel" src="components/Badge.js"></script>
+  <script type="text/babel" src="components/Button.js"></script>
+
+  <!-- Main app -->
+  <script type="text/babel" src="app.js"></script>
+</body>
+</html>
