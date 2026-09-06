@@ -12,10 +12,10 @@ function OnboardingPage({ onComplete }) {
   const [groomName, setGroomName] = React.useState('');
 
   const traditions = [
-    { key: 'Tamil', icon: '🛕' },
-    { key: 'Sinhala', icon: '🪷' },
-    { key: 'Christian', icon: '✝️' },
-    { key: 'Muslim', icon: '☪️' },
+    { key: 'Tamil', icon: 'assets/images/tradition-tamil.svg' },
+    { key: 'Sinhala', icon: 'assets/images/tradition-sinhala.svg' },
+    { key: 'Christian', icon: 'assets/images/tradition-christian.svg' },
+    { key: 'Muslim', icon: 'assets/images/tradition-muslim.svg' },
   ];
 
   return (
@@ -56,7 +56,7 @@ function OnboardingPage({ onComplete }) {
                   ? 'bg-gradient-to-b from-gold to-[#e0c88a] border-gold text-[#3a2a12]'
                   : 'border-gray-300 text-gray-600 hover:border-gold'}`}
             >
-              <span className="text-xl">{t.icon}</span>
+              <img src={t.icon} alt={t.key} className="w-8 h-8" />
               <span className="text-sm font-medium">{t.key}</span>
             </div>
           ))}
