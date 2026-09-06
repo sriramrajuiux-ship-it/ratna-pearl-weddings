@@ -1,0 +1,54 @@
+/*
+  tokens.css
+  ----------
+  CSS custom properties (variables) mirroring the same design tokens
+  defined in styles/tokens.js — but usable in plain CSS, for anything
+  that's easier to write by hand than as a Tailwind utility class
+  (custom animations, one-off overrides, pseudo-elements, etc.)
+
+  Usage in your own CSS:
+    .my-custom-thing {
+      color: var(--color-gold);
+      font-family: var(--font-heading);
+    }
+
+  These values should always match tokens.js — if you change a color
+  here, update it there too (and vice versa) so the two systems don't
+  drift apart.
+*/
+
+:root {
+  /* Brand colors */
+  --color-gold: #B8935A;
+  --color-maroon: #6B1F2A;
+  --color-ivory: #FAF7F2;
+
+  /* Status colors (kept here too, in case you want them outside Badge.js) */
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+
+  /* Fonts */
+  --font-heading: 'Cinzel Decorative', serif;
+  --font-quote: 'Libre Bodoni', serif;
+  --font-body: 'Jost', sans-serif;
+
+  /* Spacing scale (matches Tailwind's default 4px base unit) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* Base body styling */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-ivory);
+}
+
+/*
+  Add any manual/custom styles below this line — things like
+  keyframe animations, print styles, or fine-tuned overrides
+  that don't map cleanly to a Tailwind class.
+*/
