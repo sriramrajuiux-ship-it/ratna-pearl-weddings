@@ -1,34 +1,66 @@
 // app.js
-// This is our starting point — just enough to prove Badge and Button
-// work and render correctly. We'll build this out page by page
-// (Onboarding, Dashboard, Vendor Marketplace, etc.) in the commits
-// that follow.
+// The root component. Instead of React Router, we use a simple state
+// variable to decide which "page" is showing — this keeps things simple
+// while still giving us genuine multi-view navigation, matching the
+// confirmed screen order:
+// Landing -> Onboarding -> Home -> Date & Venue -> Vendor Marketplace
+// -> Budget Tracker -> Design Studio -> Guests -> Timeline & Checklist
 
 function App() {
+  const [page, setPage] = React.useState('landing');
+
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4 p-8">
-      <h1 className="font-heading text-2xl text-maroon">Ratna Pearl Weddings</h1>
-      <p className="text-gray-500 text-sm">Component test — Badge, Button, Avatar, Input</p>
+    <div>
+      {page === 'landing' && (
+        <LandingPage onStart={() => setPage('onboarding')} />
+      )}
 
-      <div className="flex gap-2">
-        <Badge status="Approved" />
-        <Badge status="Pending" />
-        <Badge status="Overdue" />
-      </div>
+      {page === 'onboarding' && (
+        <OnboardingPage onComplete={() => setPage('home')} />
+      )}
 
-      <div className="flex gap-2">
-        <Button variant="primary">Add vendor</Button>
-        <Button variant="secondary">Cancel</Button>
-      </div>
+      {/* Every page from here on shares the same top navigation */}
+      {page !== 'landing' && page !== 'onboarding' && (
+        <div className="min-h-screen bg-ivory">
+          <TopNav active={page} onNavigate={setPage} />
 
-      <div className="flex gap-2 items-center">
-        <Avatar initials="AM" />
-        <Avatar initials="DN" size="sm" />
-      </div>
-
-      <div className="w-64">
-        <Input label="Bride's name" placeholder="e.g. Amaya" />
-      </div>
+          {page === 'home' && (
+            <div className="p-10 text-center text-gray-400">
+              Home / Dashboard — coming next
+            </div>
+          )}
+          {page === 'venue' && (
+            <div className="p-10 text-center text-gray-400">
+              Date & Venue — coming next
+            </div>
+          )}
+          {page === 'vendors' && (
+            <div className="p-10 text-center text-gray-400">
+              Vendor Marketplace — coming next
+            </div>
+          )}
+          {page === 'budget' && (
+            <div className="p-10 text-center text-gray-400">
+              Budget Tracker — coming next
+            </div>
+          )}
+          {page === 'design' && (
+            <div className="p-10 text-center text-gray-400">
+              Design Studio — coming next
+            </div>
+          )}
+          {page === 'guests' && (
+            <div className="p-10 text-center text-gray-400">
+              Guests — coming next
+            </div>
+          )}
+          {page === 'timeline' && (
+            <div className="p-10 text-center text-gray-400">
+              Timeline & Checklist — coming next
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
