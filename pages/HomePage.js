@@ -7,12 +7,12 @@
 
 function HomePage({ onNavigate }) {
   const quickAccess = [
-    { key: 'venue', label: 'Venue', icon: '🏛️' },
-    { key: 'vendors', label: 'Vendors', icon: '💐' },
-    { key: 'design', label: 'Card Design', icon: '✉️' },
-    { key: 'guests', label: 'Guests', icon: '👥' },
-    { key: 'timeline', label: 'Timeline', icon: '⏱️' },
-    { key: 'budget', label: 'Budget', icon: '💳' },
+    { key: 'venue', label: 'Venue', icon: 'assets/images/icon-venue.svg' },
+    { key: 'vendors', label: 'Vendors', icon: 'assets/images/icon-vendors.svg' },
+    { key: 'design', label: 'Card Design', icon: 'assets/images/icon-design.svg' },
+    { key: 'guests', label: 'Guests', icon: 'assets/images/icon-guests.svg' },
+    { key: 'timeline', label: 'Timeline', icon: 'assets/images/icon-timeline.svg' },
+    { key: 'budget', label: 'Budget', icon: 'assets/images/icon-budget.svg' },
   ];
 
   return (
@@ -46,7 +46,7 @@ function HomePage({ onNavigate }) {
             onClick={() => onNavigate(item.key)}
             className="border border-gold/40 rounded-lg py-10 flex flex-col items-center gap-3 cursor-pointer hover:bg-white/50 transition-colors"
           >
-            <span className="text-2xl">{item.icon}</span>
+            <img src={item.icon} alt={item.label} className="w-8 h-8" />
             <span className="text-sm text-gray-700">{item.label}</span>
           </div>
         ))}
