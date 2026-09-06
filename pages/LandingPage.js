@@ -11,15 +11,17 @@ function LandingPage({ onStart }) {
       className="min-h-screen flex flex-col justify-center px-16 relative"
       style={{
         backgroundImage:
-          'linear-gradient(rgba(20,10,10,0.55), rgba(20,10,10,0.35)), url(https://images.unsplash.com/photo-1519741497674-611481863552?w=1600&q=80)',
+          'linear-gradient(rgba(20,10,10,0.55), rgba(20,10,10,0.35)), url(assets/images/hero-couple.png)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
       }}
     >
-      {/* Small mark, top-left */}
-      <div className="absolute top-10 left-16 w-8 h-8 border border-gold rounded-full flex items-center justify-center">
-        <div className="w-2 h-2 bg-gold rounded-full"></div>
-      </div>
+      {/* Brand motif icon, above the tagline */}
+      <img
+        src="assets/images/motif-icon.png"
+        alt="Ratna Pearl Weddings motif"
+        className="w-8 mb-4"
+      />
 
       <p className="text-gold text-sm tracking-widest uppercase mb-4">
         Curated Wedding Planning · Sri Lanka
