@@ -21,11 +21,17 @@ function OnboardingPage({ onComplete }) {
   return (
     <div className="min-h-screen bg-ivory flex items-center justify-center px-6 py-20 relative overflow-hidden">
 
-      {/* Floral corner decorations — simple, reused top-left / top-right / bottom-left / bottom-right */}
-      <div className="absolute -top-6 -left-6 text-6xl opacity-30 rotate-[-10deg]">🌸</div>
-      <div className="absolute -top-6 -right-6 text-6xl opacity-30 rotate-[10deg]">🌿</div>
-      <div className="absolute -bottom-6 -left-6 text-6xl opacity-30 rotate-[10deg]">🌿</div>
-      <div className="absolute -bottom-6 -right-6 text-6xl opacity-30 rotate-[-10deg]">🌸</div>
+      {/* Floral border images — full width, top and bottom */}
+      <img
+        src="assets/images/floral-top.png"
+        alt=""
+        className="absolute top-0 left-0 w-full pointer-events-none select-none"
+      />
+      <img
+        src="assets/images/floral-bottom.png"
+        alt=""
+        className="absolute bottom-0 left-0 w-full pointer-events-none select-none"
+      />
 
       <div className="max-w-xl w-full text-center relative z-10">
         <h1 className="font-heading text-gold text-4xl mb-3">RATNA PEARL WEDDINGS</h1>
