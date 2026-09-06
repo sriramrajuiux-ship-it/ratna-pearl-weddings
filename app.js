@@ -1,13 +1,21 @@
 // app.js
-// The root component. Instead of React Router, we use a simple state
-// variable to decide which "page" is showing — this keeps things simple
-// while still giving us genuine multi-view navigation, matching the
-// confirmed screen order:
-// Landing -> Onboarding -> Home -> Date & Venue -> Vendor Marketplace
-// -> Budget Tracker -> Design Studio -> Guests -> Timeline & Checklist
+// The root component. `selectedVendors` is lifted up here (not kept
+// inside Vendor Marketplace) specifically so Budget Tracker can read
+// the same data — this is what makes adding a vendor on one page
+// show up live on another, matching our Task 1 interaction design.
 
 function App() {
   const [page, setPage] = React.useState('landing');
+
+  const [selectedVendors, setSelectedVendors] = React.useState([
+    { id: 'venue', name: 'Venue - Kandy Heritage Hall', category: 'Venue', price: 350000, status: 'Approved' },
+    { id: 'catering-serendib', name: 'Serendib Catering', category: 'Catering', price: 300000, status: 'Pending' },
+    { id: 'decor-poruwa', name: 'Poruwa Decor Studio', category: 'Decor', price: 200000, status: 'Approved' },
+  ]);
+
+  function addVendor(vendor) {
+    setSelectedVendors((prev) => [...prev, vendor]);
+  }
 
   return (
     <div>
@@ -19,44 +27,25 @@ function App() {
         <OnboardingPage onComplete={() => setPage('home')} />
       )}
 
-      {/* Every page from here on shares the same top navigation */}
       {page !== 'landing' && page !== 'onboarding' && (
         <div className="min-h-screen bg-ivory">
           <TopNav active={page} onNavigate={setPage} />
 
-          {page === 'home' && (
-            <HomePage onNavigate={setPage} />
-          )}
-          {page === 'venue' && (
-            <div className="p-10 text-center text-gray-400">
-              Date & Venue — coming next
-            </div>
-          )}
+          {page === 'home' && <HomePage onNavigate={setPage} />}
+          {page === 'venue' && <DateVenuePage />}
           {page === 'vendors' && (
-            <div className="p-10 text-center text-gray-400">
-              Vendor Marketplace — coming next
-            </div>
+            <VendorMarketplacePage
+              selectedVendors={selectedVendors}
+              onAdd={addVendor}
+              onNavigate={setPage}
+            />
           )}
           {page === 'budget' && (
-            <div className="p-10 text-center text-gray-400">
-              Budget Tracker — coming next
-            </div>
+            <BudgetTrackerPage selectedVendors={selectedVendors} />
           )}
-          {page === 'design' && (
-            <div className="p-10 text-center text-gray-400">
-              Design Studio — coming next
-            </div>
-          )}
-          {page === 'guests' && (
-            <div className="p-10 text-center text-gray-400">
-              Guests — coming next
-            </div>
-          )}
-          {page === 'timeline' && (
-            <div className="p-10 text-center text-gray-400">
-              Timeline & Checklist — coming next
-            </div>
-          )}
+          {page === 'design' && <DesignStudioPage />}
+          {page === 'guests' && <GuestsPage />}
+          {page === 'timeline' && <TimelinePage />}
         </div>
       )}
     </div>
