@@ -19,29 +19,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Libre+Bodoni:ital@0;1&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Design tokens: colors, fonts -->
+  <!-- Design tokens: colors, fonts (see styles/tokens.js) -->
+  <script src="styles/tokens.js"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            gold: '#B8935A',
-            maroon: '#6B1F2A',
-            ivory: '#FAF7F2',
-          },
-          fontFamily: {
-            heading: ['"Cinzel Decorative"', 'serif'],
-            quote: ['"Libre Bodoni"', 'serif'],
-            body: ['"Jost"', 'sans-serif'],
-          },
+          colors: designTokens.colors,
+          fontFamily: designTokens.fontFamily,
         },
       },
     };
   </script>
 
-  <style>
-    body { font-family: 'Jost', sans-serif; }
-  </style>
+  <!-- CSS custom properties + any hand-written styles -->
+  <link rel="stylesheet" href="styles/tokens.css">
 </head>
 <body class="bg-ivory">
   <div id="root"></div>
