@@ -25,9 +25,7 @@ function App() {
           <TopNav active={page} onNavigate={setPage} />
 
           {page === 'home' && (
-            <div className="p-10 text-center text-gray-400">
-              Home / Dashboard — coming next
-            </div>
+            <HomePage onNavigate={setPage} />
           )}
           {page === 'venue' && (
             <div className="p-10 text-center text-gray-400">
