@@ -8,7 +8,7 @@
 function LandingPage({ onStart }) {
   return (
     <div
-      className="min-h-screen flex flex-col justify-center px-16 relative"
+      className="min-h-screen flex flex-col justify-center px-6 md:px-16 relative"
       style={{
         backgroundImage:
           'linear-gradient(rgba(20,10,10,0.55), rgba(20,10,10,0.35)), url(assets/images/hero-couple.png)',
@@ -27,20 +27,20 @@ function LandingPage({ onStart }) {
         Curated Wedding Planning · Sri Lanka
       </p>
 
-      <h1 className="font-heading text-white text-6xl leading-tight mb-2">
+      <h1 className="font-heading text-white text-4xl md:text-6xl leading-tight mb-2">
         Ratna Pearl
       </h1>
-      <h1 className="font-heading text-gold text-6xl leading-tight mb-6">
+      <h1 className="font-heading text-gold text-4xl md:text-6xl leading-tight mb-6">
         Weddings
       </h1>
 
       <div className="w-24 h-px bg-gold mb-6"></div>
 
-      <p className="font-quote italic text-white text-lg mb-10 max-w-md">
+      <p className="font-quote italic text-white text-base md:text-lg mb-8 md:mb-10 max-w-md">
         "Welcome to Ratna Pearl Weddings. Where your love story meets thoughtful planning."
       </p>
 
-      <div className="flex items-center gap-8">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
         <button
           onClick={onStart}
           className="bg-gradient-to-r from-gold to-[#e0c88a] text-[#3a2a12] font-semibold text-sm tracking-wide px-8 py-4 rounded"
