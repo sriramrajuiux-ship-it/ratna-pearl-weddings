@@ -46,7 +46,7 @@ function OnboardingPage({ onComplete }) {
         </div>
 
         <p className="text-xs tracking-widest text-gray-500 mb-3 text-left">CHOOSE YOUR TRADITION</p>
-        <div className="grid grid-cols-4 gap-3 mb-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {traditions.map((t) => (
             <div
               key={t.key}
@@ -62,7 +62,7 @@ function OnboardingPage({ onComplete }) {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mb-10 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
           <Input
             label="BRIDE'S NAME"
             placeholder="e.g. Shalini"
