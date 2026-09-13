@@ -41,14 +41,15 @@ function HomePage({ onNavigate }) {
       <p className="text-xs tracking-widest text-gray-500 mb-4">QUICK ACCESS</p>
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
         {quickAccess.map((item) => (
-          <div
+          <button
+            type="button"
             key={item.key}
             onClick={() => onNavigate(item.key)}
             className="border border-gold/40 rounded-lg py-10 flex flex-col items-center gap-3 cursor-pointer hover:bg-white/50 transition-colors"
           >
-            <img src={item.icon} alt={item.label} className="w-8 h-8" />
+            <img src={item.icon} alt="" className="w-8 h-8" />
             <span className="text-sm text-gray-700">{item.label}</span>
-          </div>
+          </button>
         ))}
       </div>
     </div>
