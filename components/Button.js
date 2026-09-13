@@ -5,8 +5,8 @@
 //
 // Usage: <Button variant="primary" onClick={...}>Add</Button>
 
-function Button({ variant = 'primary', children, onClick }) {
-  const base = 'text-sm font-medium px-4 py-2 rounded-lg transition-colors';
+function Button({ variant = 'primary', type = 'button', children, onClick }) {
+  const base = 'text-sm font-medium px-4 py-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-1';
 
   const variants = {
     primary: 'text-white bg-gradient-to-r from-gold to-maroon hover:opacity-90',
@@ -15,6 +15,7 @@ function Button({ variant = 'primary', children, onClick }) {
 
   return (
     <button
+      type={type}
       className={`${base} ${variants[variant]}`}
       onClick={onClick}
     >
