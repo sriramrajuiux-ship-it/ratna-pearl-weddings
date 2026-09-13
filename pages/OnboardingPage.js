@@ -48,17 +48,19 @@ function OnboardingPage({ onComplete }) {
         <p className="text-xs tracking-widest text-gray-500 mb-3 text-left">CHOOSE YOUR TRADITION</p>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
           {traditions.map((t) => (
-            <div
+            <button
+              type="button"
               key={t.key}
               onClick={() => setTradition(t.key)}
+              aria-pressed={tradition === t.key}
               className={`cursor-pointer border rounded-lg py-6 flex flex-col items-center gap-2 transition-colors
                 ${tradition === t.key
                   ? 'bg-gradient-to-b from-gold to-[#e0c88a] border-gold text-[#3a2a12]'
                   : 'border-gray-300 text-gray-600 hover:border-gold'}`}
             >
-              <img src={t.icon} alt={t.key} className="w-8 h-8" />
+              <img src={t.icon} alt="" className="w-8 h-8" />
               <span className="text-sm font-medium">{t.key}</span>
-            </div>
+            </button>
           ))}
         </div>
 
