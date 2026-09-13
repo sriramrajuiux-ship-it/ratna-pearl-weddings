@@ -23,14 +23,16 @@ function DesignStudioPage() {
           <p className="text-xs tracking-widest text-gray-500 mb-4">TEMPLATES</p>
           <div className="grid grid-cols-2 gap-3 mb-4">
             {templates.map((t) => (
-              <div
+              <button
+                type="button"
                 key={t}
                 onClick={() => setActiveTemplate(t)}
+                aria-pressed={activeTemplate === t}
                 className={`cursor-pointer border rounded-lg h-24 flex items-center justify-center text-sm
                   ${activeTemplate === t ? 'border-2 border-gold text-gold font-medium' : 'border-gray-300 text-gray-600 hover:border-gold'}`}
               >
                 {t}
-              </div>
+              </button>
             ))}
           </div>
           <Button variant="secondary">Request Custom Changes</Button>
