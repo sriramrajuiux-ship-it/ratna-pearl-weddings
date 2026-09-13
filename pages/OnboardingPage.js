@@ -11,18 +11,13 @@
 //
 // Usage: <OnboardingPage onComplete={({ bride, groom, tradition }) => ...} />
 
-function OnboardingPage({ onComplete }) {
+function OnboardingPage({ onBack, onComplete }) {
   const [tradition, setTradition] = React.useState('Tamil');
   const [brideName, setBrideName] = React.useState('');
   const [groomName, setGroomName] = React.useState('');
   const [error, setError] = React.useState('');
 
-  const traditions = [
-    { key: 'Tamil', icon: 'assets/images/tradition-tamil.svg' },
-    { key: 'Sinhala', icon: 'assets/images/tradition-sinhala.svg' },
-    { key: 'Christian', icon: 'assets/images/tradition-christian.svg' },
-    { key: 'Muslim', icon: 'assets/images/tradition-muslim.svg' },
-  ];
+  const traditions = ['Tamil', 'Sinhala', 'Christian', 'Muslim'];
 
   function handleSubmit() {
     if (!brideName.trim() || !groomName.trim()) {
@@ -49,6 +44,9 @@ function OnboardingPage({ onComplete }) {
       />
 
       <div className="max-w-xl w-full text-center relative z-10">
+        <div className="text-left mb-4">
+          <BackButton onClick={onBack} />
+        </div>
         <h1 className="font-heading text-gold text-4xl mb-3">RATNA PEARL WEDDINGS</h1>
         <p className="font-quote italic text-gray-600 mb-6">
           Step through, and let's begin planning your wedding together
@@ -65,16 +63,16 @@ function OnboardingPage({ onComplete }) {
           {traditions.map((t) => (
             <button
               type="button"
-              key={t.key}
-              onClick={() => setTradition(t.key)}
-              aria-pressed={tradition === t.key}
+              key={t}
+              onClick={() => setTradition(t)}
+              aria-pressed={tradition === t}
               className={`cursor-pointer border rounded-lg py-6 flex flex-col items-center gap-2 transition-colors
-                ${tradition === t.key
+                ${tradition === t
                   ? 'bg-gradient-to-b from-gold to-[#e0c88a] border-gold text-[#3a2a12]'
                   : 'border-gray-300 text-gray-600 hover:border-gold'}`}
             >
-              <img src={t.icon} alt="" className="w-8 h-8" />
-              <span className="text-sm font-medium">{t.key}</span>
+              <TraditionIcon type={t} className="w-8 h-8" />
+              <span className="text-sm font-medium">{t}</span>
             </button>
           ))}
         </div>
