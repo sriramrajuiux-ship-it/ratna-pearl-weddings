@@ -18,16 +18,18 @@ function DateVenuePage() {
           <p className="text-xs tracking-widest text-gray-500 mb-4">SUGGESTED NEKATHA DATES</p>
           <div className="flex flex-col gap-3">
             {dates.map((d) => (
-              <div
+              <button
+                type="button"
                 key={d}
                 onClick={() => setSelectedDate(d)}
-                className={`cursor-pointer rounded-lg px-4 py-3 text-sm border text-center
+                aria-pressed={selectedDate === d}
+                className={`cursor-pointer rounded-lg px-4 py-3 text-sm border text-center w-full
                   ${selectedDate === d
                     ? 'bg-gradient-to-r from-gold to-[#e0c88a] text-[#3a2a12] border-gold'
                     : 'border-gray-300 text-gray-600 hover:border-gold'}`}
               >
                 {d}
-              </div>
+              </button>
             ))}
           </div>
         </div>
