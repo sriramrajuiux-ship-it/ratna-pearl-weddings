@@ -13,11 +13,11 @@ function DesignStudioPage() {
   ];
 
   return (
-    <div className="px-16 py-12">
+    <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Your wedding, beautifully designed</p>
-      <h1 className="font-heading text-3xl text-gray-800 mb-10">DESIGN STUDIO</h1>
+      <h1 className="font-heading text-2xl md:text-3xl text-gray-800 mb-6 md:mb-10">DESIGN STUDIO</h1>
 
-      <div className="grid grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Templates */}
         <div>
           <p className="text-xs tracking-widest text-gray-500 mb-4">TEMPLATES</p>
@@ -37,7 +37,7 @@ function DesignStudioPage() {
         </div>
 
         {/* Live preview + guest cards */}
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           <div className="border-2 border-gold rounded-lg p-10 text-center mb-6 bg-white/50">
             <p className="text-xs tracking-widest text-gold mb-3">TOGETHER WITH THEIR FAMILIES</p>
             <p className="font-heading text-2xl text-gray-800 mb-2">Shalini &amp; Ajith</p>
