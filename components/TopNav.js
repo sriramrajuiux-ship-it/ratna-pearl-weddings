@@ -4,6 +4,14 @@
 // breakpoint, 768px). Both share the same `go()` navigation logic —
 // only the layout differs.
 //
+// Accessibility: every clickable item is a real <button> (not a
+// <span>/<div> with onClick), so keyboard users can Tab to it and
+// activate it with Enter/Space — browsers give this to us for free
+// on <button> but NOT on arbitrary elements. Dropdown toggles use
+// aria-expanded/aria-haspopup, and the active page gets aria-current
+// so screen readers announce "current page" the way they would for
+// a real link.
+//
 // Usage: <TopNav active="home" onNavigate={(page) => ...} />
 
 function TopNav({ active, onNavigate }) {
@@ -40,10 +48,10 @@ function TopNav({ active, onNavigate }) {
   }
 
   const linkClass = (page) =>
-    `text-sm font-medium cursor-pointer ${active === page ? 'text-gold' : 'text-gray-800'}`;
+    `text-sm font-medium bg-transparent border-0 p-0 cursor-pointer ${active === page ? 'text-gold' : 'text-gray-800'}`;
 
   return (
-    <nav className="bg-ivory relative">
+    <nav className="bg-ivory relative" aria-label="Main navigation">
       <div className="flex items-center justify-between px-6 md:px-10 py-5">
         <span className="font-heading text-xs md:text-sm tracking-wide text-gold">
           RATNA PEARL WEDDINGS
@@ -51,67 +59,96 @@ function TopNav({ active, onNavigate }) {
 
         {/* Desktop nav — hidden below md */}
         <div className="hidden md:flex items-center gap-8">
-          <span className={linkClass('home')} onClick={() => go('home')}>Home</span>
+          <button
+            type="button"
+            className={linkClass('home')}
+            aria-current={active === 'home' ? 'page' : undefined}
+            onClick={() => go('home')}
+          >
+            Home
+          </button>
 
           <div className="relative">
-            <span
+            <button
+              type="button"
               className={`${linkClass('wedding')} flex items-center gap-1`}
+              aria-haspopup="true"
+              aria-expanded={openMenu === 'wedding'}
               onClick={() => toggleMenu('wedding')}
             >
-              My Wedding <span className="text-xs">▾</span>
-            </span>
+              My Wedding <span aria-hidden="true" className="text-xs">▾</span>
+            </button>
             {openMenu === 'wedding' && (
               <div className="absolute top-8 left-0 bg-white border border-gray-200 rounded-lg shadow-md py-2 w-44 z-10">
                 {weddingLinks.map((link) => (
-                  <div
+                  <button
+                    type="button"
                     key={link.key}
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer"
+                    className="block w-full text-left bg-transparent border-0 px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer"
                     onClick={() => go(link.key)}
                   >
                     {link.label}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
           </div>
 
           <div className="relative">
-            <span
+            <button
+              type="button"
               className={`${linkClass('vendors')} flex items-center gap-1`}
+              aria-haspopup="true"
+              aria-expanded={openMenu === 'vendors'}
               onClick={() => toggleMenu('vendors')}
             >
-              Vendors <span className="text-xs">▾</span>
-            </span>
+              Vendors <span aria-hidden="true" className="text-xs">▾</span>
+            </button>
             {openMenu === 'vendors' && (
               <div className="absolute top-8 left-0 bg-white border border-gray-200 rounded-lg shadow-md py-2 w-44 z-10">
                 {vendorLinks.map((link, i) => (
-                  <div
+                  <button
+                    type="button"
                     key={i}
-                    className="px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer"
+                    className="block w-full text-left bg-transparent border-0 px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer"
                     onClick={() => go(link.key)}
                   >
                     {link.label}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
           </div>
 
-          <span className={linkClass('timeline')} onClick={() => go('timeline')}>Timeline</span>
+          <button
+            type="button"
+            className={linkClass('timeline')}
+            aria-current={active === 'timeline' ? 'page' : undefined}
+            onClick={() => go('timeline')}
+          >
+            Timeline
+          </button>
 
           <div className="relative">
-            <span
-              className="text-sm font-medium text-gray-800 flex items-center gap-1 cursor-pointer"
+            <button
+              type="button"
+              className="text-sm font-medium text-gray-800 bg-transparent border-0 p-0 flex items-center gap-1 cursor-pointer"
+              aria-haspopup="true"
+              aria-expanded={openMenu === 'contact'}
               onClick={() => toggleMenu('contact')}
             >
-              Contact <span className="text-xs">▾</span>
-            </span>
+              Contact <span aria-hidden="true" className="text-xs">▾</span>
+            </button>
             {openMenu === 'contact' && (
               <div className="absolute top-8 right-0 bg-white border border-gray-200 rounded-lg shadow-md py-2 w-36 z-10">
                 {contactLinks.map((link, i) => (
-                  <div key={i} className="px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer">
+                  <button
+                    type="button"
+                    key={i}
+                    className="block w-full text-left bg-transparent border-0 px-4 py-2 text-sm text-gray-700 hover:bg-ivory cursor-pointer"
+                  >
                     {link.label}
-                  </div>
+                  </button>
                 ))}
               </div>
             )}
@@ -120,8 +157,9 @@ function TopNav({ active, onNavigate }) {
 
         {/* Hamburger button — visible only below md */}
         <button
+          type="button"
           className="md:hidden flex flex-col gap-1.5 p-2"
-          aria-label="Open menu"
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={mobileOpen}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
@@ -134,35 +172,57 @@ function TopNav({ active, onNavigate }) {
       {/* Mobile menu — stacked list, shown only when toggled open */}
       {mobileOpen && (
         <div className="md:hidden flex flex-col border-t border-gold/30 px-6 py-4 gap-1 bg-ivory">
-          <div className={`py-2 ${linkClass('home')}`} onClick={() => go('home')}>Home</div>
+          <button
+            type="button"
+            className={`text-left py-2 ${linkClass('home')}`}
+            aria-current={active === 'home' ? 'page' : undefined}
+            onClick={() => go('home')}
+          >
+            Home
+          </button>
 
           <p className="text-xs tracking-widest text-gray-400 pt-3 pb-1">MY WEDDING</p>
           {weddingLinks.map((link) => (
-            <div
+            <button
+              type="button"
               key={link.key}
-              className="py-2 pl-3 text-sm text-gray-700"
+              className="text-left bg-transparent border-0 py-2 pl-3 text-sm text-gray-700"
               onClick={() => go(link.key)}
             >
               {link.label}
-            </div>
+            </button>
           ))}
 
           <p className="text-xs tracking-widest text-gray-400 pt-3 pb-1">VENDORS</p>
           {vendorLinks.map((link, i) => (
-            <div
+            <button
+              type="button"
               key={i}
-              className="py-2 pl-3 text-sm text-gray-700"
+              className="text-left bg-transparent border-0 py-2 pl-3 text-sm text-gray-700"
               onClick={() => go(link.key)}
             >
               {link.label}
-            </div>
+            </button>
           ))}
 
-          <div className={`py-2 pt-3 ${linkClass('timeline')}`} onClick={() => go('timeline')}>Timeline</div>
+          <button
+            type="button"
+            className={`text-left py-2 pt-3 ${linkClass('timeline')}`}
+            aria-current={active === 'timeline' ? 'page' : undefined}
+            onClick={() => go('timeline')}
+          >
+            Timeline
+          </button>
 
           <p className="text-xs tracking-widest text-gray-400 pt-3 pb-1">CONTACT</p>
           {contactLinks.map((link, i) => (
-            <div key={i} className="py-2 pl-3 text-sm text-gray-700">{link.label}</div>
+            <button
+              type="button"
+              key={i}
+              className="text-left bg-transparent border-0 py-2 pl-3 text-sm text-gray-700"
+            >
+              {link.label}
+            </button>
           ))}
         </div>
       )}
