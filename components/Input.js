@@ -5,12 +5,15 @@
 // Usage: <Input label="Bride's name" placeholder="e.g. Amaya" value={...} onChange={...} />
 
 function Input({ label, placeholder, value, onChange, type = 'text' }) {
+  const id = React.useId();
+
   return (
     <div className="flex flex-col gap-1">
       {label && (
-        <label className="text-xs text-gray-500">{label}</label>
+        <label htmlFor={id} className="text-xs text-gray-500">{label}</label>
       )}
       <input
+        id={id}
         type={type}
         placeholder={placeholder}
         value={value}
