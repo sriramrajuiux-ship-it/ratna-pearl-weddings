@@ -32,9 +32,9 @@ function VendorMarketplacePage({ selectedVendors, onAdd, onNavigate }) {
   const shortlistTotal = shortlist.reduce((sum, v) => sum + v.price, 0);
 
   return (
-    <div className="px-16 py-12">
+    <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Curated for your celebration</p>
-      <h1 className="font-heading text-3xl text-gray-800 mb-8">VENDOR MARKETPLACE</h1>
+      <h1 className="font-heading text-2xl md:text-3xl text-gray-800 mb-6 md:mb-8">VENDOR MARKETPLACE</h1>
 
       {/* Filters + search */}
       <div className="flex items-center gap-3 mb-8 flex-wrap">
@@ -55,12 +55,12 @@ function VendorMarketplacePage({ selectedVendors, onAdd, onNavigate }) {
           placeholder="Search vendors..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="ml-auto border border-gray-300 rounded-full px-4 py-2 text-sm w-56 focus:outline-none focus:ring-2 focus:ring-gold"
+          className="w-full sm:w-56 sm:ml-auto border border-gray-300 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gold"
         />
       </div>
 
       {/* Vendor grid */}
-      <div className="grid grid-cols-3 gap-6 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
         {filtered.map((v) => (
           <div key={v.id} className="border border-gold/40 rounded-lg overflow-hidden">
             <div className="h-24 bg-gradient-to-br from-gold to-[#e0c88a]"></div>
