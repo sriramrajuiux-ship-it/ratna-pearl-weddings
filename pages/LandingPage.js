@@ -43,7 +43,10 @@ function LandingPage({ onStart }) {
       <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
         <button
           onClick={onStart}
-          className="bg-gradient-to-r from-gold to-[#e0c88a] text-[#3a2a12] font-semibold text-sm tracking-wide px-8 py-4 rounded"
+          className="bg-gradient-to-r from-gold to-[#e0c88a] text-[#3a2a12] font-semibold text-sm tracking-wide px-8 py-4 rounded
+                     transition-all duration-300 ease-out
+                     hover:scale-105 hover:shadow-lg hover:shadow-gold/40 hover:from-[#e0c88a] hover:to-gold
+                     focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-black/40"
         >
           START PLANNING
         </button>
