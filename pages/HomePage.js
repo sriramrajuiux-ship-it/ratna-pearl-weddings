@@ -5,7 +5,7 @@
 //
 // Usage: <HomePage onNavigate={(page) => setPage(page)} />
 
-function HomePage({ onNavigate }) {
+function HomePage({ coupleInfo, onNavigate }) {
   const quickAccess = [
     { key: 'venue', label: 'Venue', icon: 'assets/images/icon-venue.svg' },
     { key: 'vendors', label: 'Vendors', icon: 'assets/images/icon-vendors.svg' },
@@ -18,7 +18,9 @@ function HomePage({ onNavigate }) {
   return (
     <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Warm Welcome!</p>
-      <h1 className="font-heading text-gold text-2xl md:text-4xl mb-6 md:mb-10">SHALINI &amp; AJITH</h1>
+      <h1 className="font-heading text-gold text-2xl md:text-4xl mb-6 md:mb-10">
+        {coupleInfo.bride.toUpperCase()} &amp; {coupleInfo.groom.toUpperCase()}
+      </h1>
 
       {/* Metric cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
