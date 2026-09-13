@@ -40,8 +40,10 @@ function VendorMarketplacePage({ selectedVendors, onAdd, onNavigate }) {
       <div className="flex items-center gap-3 mb-8 flex-wrap">
         {categories.map((c) => (
           <button
+            type="button"
             key={c}
             onClick={() => setActiveCategory(c)}
+            aria-pressed={activeCategory === c}
             className={`text-sm px-4 py-2 rounded-full border
               ${activeCategory === c
                 ? 'bg-gradient-to-r from-gold to-[#e0c88a] text-[#3a2a12] border-gold'
@@ -52,6 +54,7 @@ function VendorMarketplacePage({ selectedVendors, onAdd, onNavigate }) {
         ))}
         <input
           type="text"
+          aria-label="Search vendors"
           placeholder="Search vendors..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
