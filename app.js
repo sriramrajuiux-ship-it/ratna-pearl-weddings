@@ -7,6 +7,14 @@
 function App() {
   const [page, setPage] = React.useState('landing');
 
+  // Default values match what was previously hardcoded across pages —
+  // real values overwrite these the moment Onboarding is submitted.
+  const [coupleInfo, setCoupleInfo] = React.useState({
+    bride: 'Shalini',
+    groom: 'Ajith',
+    tradition: 'Tamil',
+  });
+
   const [selectedVendors, setSelectedVendors] = React.useState([
     { id: 'venue', name: 'Venue - Kandy Heritage Hall', category: 'Venue', price: 350000, status: 'Approved' },
     { id: 'catering-serendib', name: 'Serendib Catering', category: 'Catering', price: 300000, status: 'Pending' },
@@ -24,7 +32,12 @@ function App() {
       )}
 
       {page === 'onboarding' && (
-        <OnboardingPage onComplete={() => setPage('home')} />
+        <OnboardingPage
+          onComplete={(info) => {
+            setCoupleInfo(info);
+            setPage('home');
+          }}
+        />
       )}
 
       {page !== 'landing' && page !== 'onboarding' && (
@@ -42,7 +55,7 @@ function App() {
           <TopNav active={page} onNavigate={setPage} />
 
           <main id="main-content">
-            {page === 'home' && <HomePage onNavigate={setPage} />}
+            {page === 'home' && <HomePage coupleInfo={coupleInfo} onNavigate={setPage} />}
             {page === 'venue' && <DateVenuePage />}
             {page === 'vendors' && (
               <VendorMarketplacePage
@@ -54,7 +67,7 @@ function App() {
             {page === 'budget' && (
               <BudgetTrackerPage selectedVendors={selectedVendors} />
             )}
-            {page === 'design' && <DesignStudioPage />}
+            {page === 'design' && <DesignStudioPage coupleInfo={coupleInfo} />}
             {page === 'guests' && <GuestsPage />}
             {page === 'timeline' && <TimelinePage />}
           </main>
