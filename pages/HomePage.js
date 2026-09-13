@@ -16,12 +16,12 @@ function HomePage({ onNavigate }) {
   ];
 
   return (
-    <div className="px-16 py-12">
+    <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Warm Welcome!</p>
-      <h1 className="font-heading text-gold text-4xl mb-10">SHALINI &amp; AJITH</h1>
+      <h1 className="font-heading text-gold text-2xl md:text-4xl mb-6 md:mb-10">SHALINI &amp; AJITH</h1>
 
       {/* Metric cards */}
-      <div className="grid grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
         <div className="border border-gold/40 rounded-lg p-6 bg-white/40">
           <p className="text-xs tracking-widest text-gray-500 mb-2">DAYS REMAINING</p>
           <p className="font-heading text-3xl text-gray-800">110</p>
@@ -39,7 +39,7 @@ function HomePage({ onNavigate }) {
 
       {/* Quick access */}
       <p className="text-xs tracking-widest text-gray-500 mb-4">QUICK ACCESS</p>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
         {quickAccess.map((item) => (
           <div
             key={item.key}
