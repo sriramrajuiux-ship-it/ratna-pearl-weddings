@@ -17,31 +17,34 @@ function GuestsPage() {
   }
 
   return (
-    <div className="px-16 py-12">
+    <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Every guest, warmly accounted for</p>
-      <div className="flex items-center justify-between mb-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
         <h1 className="font-heading text-3xl text-gray-800">GUESTS · {guests.length}</h1>
         <Button variant="primary" onClick={addGuest}>+ Add Guest</Button>
       </div>
 
-      <div className="border border-gold/40 rounded-lg overflow-hidden">
-        <div className="grid grid-cols-4 px-6 py-3 text-xs tracking-widest text-gray-500 border-b border-gold/30">
-          <span>GUEST / FAMILY</span>
-          <span>SIDE</span>
-          <span>SEATING</span>
-          <span>RSVP</span>
-        </div>
-        {guests.map((g, i) => (
-          <div
-            key={i}
-            className={`grid grid-cols-4 px-6 py-4 items-center ${i !== guests.length - 1 ? 'border-b border-gray-100' : ''}`}
-          >
-            <span className="text-gray-800">{g.family}</span>
-            <span className="text-gray-500 text-sm">{g.side}</span>
-            <span className="text-gray-500 text-sm">{g.seating}</span>
-            <Badge status={g.rsvp} />
+      {/* Horizontal scroll on narrow screens instead of squishing the table */}
+      <div className="border border-gold/40 rounded-lg overflow-x-auto">
+        <div className="min-w-[600px]">
+          <div className="grid grid-cols-4 px-6 py-3 text-xs tracking-widest text-gray-500 border-b border-gold/30">
+            <span>GUEST / FAMILY</span>
+            <span>SIDE</span>
+            <span>SEATING</span>
+            <span>RSVP</span>
           </div>
-        ))}
+          {guests.map((g, i) => (
+            <div
+              key={i}
+              className={`grid grid-cols-4 px-6 py-4 items-center ${i !== guests.length - 1 ? 'border-b border-gray-100' : ''}`}
+            >
+              <span className="text-gray-800">{g.family}</span>
+              <span className="text-gray-500 text-sm">{g.side}</span>
+              <span className="text-gray-500 text-sm">{g.seating}</span>
+              <Badge status={g.rsvp} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
