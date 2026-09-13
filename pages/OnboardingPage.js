@@ -4,12 +4,18 @@
 // is selected (this is the "guided onboarding, not a blank form"
 // interaction pattern from our Task 1 write-up).
 //
-// Usage: <OnboardingPage onComplete={() => setPage('home')} />
+// Validation: "Enter Your Journey" is blocked until both names are
+// filled in — this is real client-side validation, not just a
+// decorative required field, and the error is announced to screen
+// readers via role="alert".
+//
+// Usage: <OnboardingPage onComplete={({ bride, groom, tradition }) => ...} />
 
 function OnboardingPage({ onComplete }) {
   const [tradition, setTradition] = React.useState('Tamil');
   const [brideName, setBrideName] = React.useState('');
   const [groomName, setGroomName] = React.useState('');
+  const [error, setError] = React.useState('');
 
   const traditions = [
     { key: 'Tamil', icon: 'assets/images/tradition-tamil.svg' },
@@ -17,6 +23,15 @@ function OnboardingPage({ onComplete }) {
     { key: 'Christian', icon: 'assets/images/tradition-christian.svg' },
     { key: 'Muslim', icon: 'assets/images/tradition-muslim.svg' },
   ];
+
+  function handleSubmit() {
+    if (!brideName.trim() || !groomName.trim()) {
+      setError("Please enter both names before continuing — we'd love to know who we're planning for.");
+      return;
+    }
+    setError('');
+    onComplete({ bride: brideName.trim(), groom: groomName.trim(), tradition });
+  }
 
   return (
     <div className="min-h-screen bg-ivory flex items-center justify-center px-6 py-20 relative overflow-hidden">
@@ -64,22 +79,30 @@ function OnboardingPage({ onComplete }) {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 text-left">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6 text-left">
           <Input
             label="BRIDE'S NAME"
             placeholder="e.g. Shalini"
             value={brideName}
             onChange={(e) => setBrideName(e.target.value)}
+            aria-invalid={!!error && !brideName.trim()}
           />
           <Input
             label="GROOM'S NAME"
             placeholder="e.g. Ajith"
             value={groomName}
             onChange={(e) => setGroomName(e.target.value)}
+            aria-invalid={!!error && !groomName.trim()}
           />
         </div>
 
-        <Button variant="primary" onClick={onComplete}>
+        {/* role="alert" makes screen readers announce this immediately,
+            the same way a browser would announce a native form error */}
+        {error && (
+          <p role="alert" className="text-sm text-red-600 mb-6">{error}</p>
+        )}
+
+        <Button variant="primary" onClick={handleSubmit}>
           ENTER YOUR JOURNEY →
         </Button>
       </div>
