@@ -12,11 +12,11 @@ function BudgetTrackerPage({ selectedVendors }) {
   const percent = Math.min(100, Math.round((total / ceiling) * 100));
 
   return (
-    <div className="px-16 py-12">
+    <div className="px-6 md:px-16 py-8 md:py-12">
       <p className="font-quote italic text-gray-500 mb-2">Tracking every rupee, gracefully</p>
-      <h1 className="font-heading text-3xl text-gray-800 mb-10">BUDGET TRACKER</h1>
+      <h1 className="font-heading text-2xl md:text-3xl text-gray-800 mb-6 md:mb-10">BUDGET TRACKER</h1>
 
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Summary card */}
         <div className="border border-gold/40 rounded-lg overflow-hidden h-fit">
           <div className="h-3 bg-gradient-to-r from-gold to-[#e0c88a]"></div>
@@ -36,11 +36,11 @@ function BudgetTrackerPage({ selectedVendors }) {
         </div>
 
         {/* Line items */}
-        <div className="col-span-2 border border-gold/40 rounded-lg p-6">
+        <div className="md:col-span-2 border border-gold/40 rounded-lg p-6">
           {selectedVendors.map((v, i) => (
             <div
               key={v.id || i}
-              className={`flex items-center justify-between py-4 ${i !== selectedVendors.length - 1 ? 'border-b border-gray-100' : ''}`}
+              className={`flex flex-wrap items-center justify-between gap-2 py-4 ${i !== selectedVendors.length - 1 ? 'border-b border-gray-100' : ''}`}
             >
               <div className="flex items-center gap-3">
                 <Avatar initials="AM" />
