@@ -3,7 +3,7 @@
 // and updates which one is "active" (the live preview always shows the
 // couple's names regardless, matching the reference design).
 
-function DesignStudioPage() {
+function DesignStudioPage({ coupleInfo }) {
   const [activeTemplate, setActiveTemplate] = React.useState('Gold Leaf');
   const templates = ['Gold Leaf', 'Floral', 'Minimal', 'Kandyan'];
 
@@ -42,7 +42,7 @@ function DesignStudioPage() {
         <div className="md:col-span-2">
           <div className="border-2 border-gold rounded-lg p-10 text-center mb-6 bg-white/50">
             <p className="text-xs tracking-widest text-gold mb-3">TOGETHER WITH THEIR FAMILIES</p>
-            <p className="font-heading text-2xl text-gray-800 mb-2">Shalini &amp; Ajith</p>
+            <p className="font-heading text-2xl text-gray-800 mb-2">{coupleInfo.bride} &amp; {coupleInfo.groom}</p>
             <p className="text-sm text-gray-500">14th February · Kandy Heritage Hall</p>
             <p className="text-xs text-gray-400 mt-4">Template: {activeTemplate}</p>
           </div>
