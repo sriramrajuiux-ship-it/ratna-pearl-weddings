@@ -29,23 +29,35 @@ function App() {
 
       {page !== 'landing' && page !== 'onboarding' && (
         <div className="min-h-screen bg-ivory">
+          {/* Skip link: invisible until focused (Tab from page load), lets
+              keyboard users jump past the nav instead of tabbing through
+              Home / My Wedding / Vendors / Timeline / Contact every time. */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-white focus:text-gray-800 focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-md"
+          >
+            Skip to main content
+          </a>
+
           <TopNav active={page} onNavigate={setPage} />
 
-          {page === 'home' && <HomePage onNavigate={setPage} />}
-          {page === 'venue' && <DateVenuePage />}
-          {page === 'vendors' && (
-            <VendorMarketplacePage
-              selectedVendors={selectedVendors}
-              onAdd={addVendor}
-              onNavigate={setPage}
-            />
-          )}
-          {page === 'budget' && (
-            <BudgetTrackerPage selectedVendors={selectedVendors} />
-          )}
-          {page === 'design' && <DesignStudioPage />}
-          {page === 'guests' && <GuestsPage />}
-          {page === 'timeline' && <TimelinePage />}
+          <main id="main-content">
+            {page === 'home' && <HomePage onNavigate={setPage} />}
+            {page === 'venue' && <DateVenuePage />}
+            {page === 'vendors' && (
+              <VendorMarketplacePage
+                selectedVendors={selectedVendors}
+                onAdd={addVendor}
+                onNavigate={setPage}
+              />
+            )}
+            {page === 'budget' && (
+              <BudgetTrackerPage selectedVendors={selectedVendors} />
+            )}
+            {page === 'design' && <DesignStudioPage />}
+            {page === 'guests' && <GuestsPage />}
+            {page === 'timeline' && <TimelinePage />}
+          </main>
         </div>
       )}
     </div>
