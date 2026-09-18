@@ -65,25 +65,7 @@ function VendorMarketplacePage({ selectedVendors, onAdd, onNavigate }) {
       {/* Vendor grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-10">
         {filtered.map((v) => (
-          <div key={v.id} className="border border-gold/40 rounded-lg overflow-hidden">
-            <div className="h-24 bg-gradient-to-br from-gold to-[#e0c88a]"></div>
-            <div className="p-5">
-              <p className="text-xs tracking-widest text-gray-500 mb-1">{v.category.toUpperCase()}</p>
-              <p className="font-heading text-lg text-gray-800 mb-2">{v.name}</p>
-              <p className="text-sm text-gray-500 mb-1">{v.desc}</p>
-              <p className="text-sm text-gold mb-4">★ {v.rating}</p>
-              <div className="flex items-center justify-between">
-                <span className="font-heading text-lg text-gray-800">Rs.{(v.price / 1000).toFixed(0)}K</span>
-                {isAdded(v.id) ? (
-                  <Badge status="Approved" />
-                ) : (
-                  <Button variant="primary" onClick={() => onAdd({ ...v, status: 'Pending' })}>
-                    Add
-                  </Button>
-                )}
-              </div>
-            </div>
-          </div>
+          <VendorCard key={v.id} vendor={v} isAdded={isAdded(v.id)} onAdd={onAdd} />
         ))}
         {filtered.length === 0 && (
           <p className="text-gray-400 text-sm col-span-3 text-center py-10">No vendors match that search.</p>
