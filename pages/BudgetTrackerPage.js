@@ -38,17 +38,7 @@ function BudgetTrackerPage({ selectedVendors }) {
         {/* Line items */}
         <div className="md:col-span-2 border border-gold/40 rounded-lg p-6">
           {selectedVendors.map((v, i) => (
-            <div
-              key={v.id || i}
-              className={`flex flex-wrap items-center justify-between gap-2 py-4 ${i !== selectedVendors.length - 1 ? 'border-b border-gray-100' : ''}`}
-            >
-              <div className="flex items-center gap-3">
-                <Avatar initials="AM" />
-                <span className="text-gray-800">{v.category}</span>
-              </div>
-              <span className="font-heading text-gray-800">Rs. {v.price.toLocaleString()}</span>
-              <Badge status={v.status} />
-            </div>
+            <BudgetLineItem key={v.id || i} item={v} isLast={i === selectedVendors.length - 1} />
           ))}
           {selectedVendors.length === 0 && (
             <p className="text-sm text-gray-400 text-center py-6">No budget items yet.</p>
